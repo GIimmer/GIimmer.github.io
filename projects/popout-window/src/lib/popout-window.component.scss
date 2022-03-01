@@ -1,0 +1,37 @@
+
+$button-diameter: 30px;
+
+.popoutWrapper {
+  position: relative;
+
+  button {
+    display: inline-block;
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    z-index: 10;
+    width: $button-diameter;
+    height: $button-diameter;
+    line-height: $button-diameter;
+
+    &#popInButton > span.icon {
+      background: url(./assets/open_in_new.png) no-repeat;
+    }
+
+    &#popOutButton > span.icon {
+      background: url(./assets/open_in_new_off.png) no-repeat;
+    }
+    
+    span.icon {
+      float: left;
+      width: 10px;
+      height: 40px;
+    }
+  }
+
+  div#innerWrapper {
+    height: calc(100% + 20px);
+    padding: 10px;
+    overflow: auto;
+  }
+}

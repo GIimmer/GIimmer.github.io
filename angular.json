@@ -160,5 +160,8 @@
       }
     }
   },
-  "defaultProject": "angular-popout-window"
+  "defaultProject": "angular-popout-window",
+  "cli": {
+    "analytics": false
+  }
 }

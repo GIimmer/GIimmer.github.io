@@ -11,6 +11,10 @@
   "bugs": {
     "url": "https://github.com/Shemesh/angular-popout-window/issues"
   },
+  "files": [
+    "open_in_new_black_24dp.svg",
+    "open_in_new_off_black_24dp.svg"
+],
   "peerDependencies": {
     "@angular/core": "^10.0.0"
   },
