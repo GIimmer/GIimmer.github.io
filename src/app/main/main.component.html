@@ -63,7 +63,6 @@
         show hidden child component
         <input type="checkbox" [(ngModel)]="childShown"/>
       </label>
-      <app-example-child *ngIf="childShown"></app-example-child>
       <br />
       <br />
       <button (click)="windowComponent.popOut()" style="margin-right: 10px">pop me Out</button>
