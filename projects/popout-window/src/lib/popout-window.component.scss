@@ -1,31 +1,43 @@
 
-$button-diameter: 30px;
+$top-margin: 20px;
 
-.popoutWrapper {
+div#popoutWrapper {
   position: relative;
+  margin-top: $top-margin;
+  min-height: 30px;
 
   button {
-    display: inline-block;
+    display: flex;
     position: absolute;
-    top: -5px;
-    right: 0px;
+    top: calc(2px - $top-margin);
+    right: 2px;
     z-index: 10;
-    width: $button-diameter;
-    height: $button-diameter;
-    line-height: $button-diameter;
+    background-color: transparent;
+    filter: opacity(50%);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      transition: filter .8s;
+      filter: opacity(100%);
+    }
 
     &#popInButton > span.icon {
-      background: url(./assets/open_in_new.png) no-repeat;
+      background: url('/assets/open_in_new_off.svg') no-repeat;
     }
 
     &#popOutButton > span.icon {
-      background: url(./assets/open_in_new_off.png) no-repeat;
+      background: url('/assets/open_in_new.svg') no-repeat;
     }
     
     span.icon {
-      float: left;
-      width: 10px;
-      height: 40px;
+      width: 24px;
+      height: 24px;
+
+      &.whiteIcon {
+        filter: invert(100%);
+      }
     }
   }
 

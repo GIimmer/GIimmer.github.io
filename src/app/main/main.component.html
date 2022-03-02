@@ -52,18 +52,13 @@
 </details>
 <h2>&lt;popout-window&gt;</h2>
 <div class="resizable" #resizableDiv>
-  <popout-window #windowComponent>
+  <popout-window [whiteIcon]="true" #windowComponent>
     <div class="div1" style="border: 7px solid gray; padding: 10px" >
       <label class="label1">
         binding jahBless:
         <input [(ngModel)]="jahBless" />
       </label>
       <br>
-      <label>
-        show hidden child component
-        <input type="checkbox" [(ngModel)]="childShown"/>
-      </label>
-      <br />
       <br />
       <button (click)="windowComponent.popOut()" style="margin-right: 10px">pop me Out</button>
       <button (click)="windowComponent.popIn()">take me inside</button>

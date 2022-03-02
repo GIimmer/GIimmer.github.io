@@ -2,6 +2,7 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/popout-window",
   "lib": {
-    "entryFile": "src/src.ts"
+    "entryFile": "src/src.ts",
+    "cssUrl": "inline"
   }
 }
