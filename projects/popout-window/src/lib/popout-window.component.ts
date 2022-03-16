@@ -20,6 +20,7 @@ import {
 export class PopoutWindowComponent implements OnDestroy  {
   @Input() windowTitle: string;
   @Input() whiteIcon: boolean;
+  @Input() wrapperRetainSizeOnPopout: boolean;
   @Output() closed: EventEmitter<boolean> = new EventEmitter();
 
   @ViewChild('innerWrapper') private innerWrapper: ElementRef;
@@ -27,6 +28,8 @@ export class PopoutWindowComponent implements OnDestroy  {
 
   private popoutWindow: Window;
   private observer: MutationObserver;
+
+  innerWrapperStyle: { [klass: string]: any; };
 
   @HostListener('window:beforeunload')
   private beforeunloadHandler(): void {
@@ -50,10 +53,11 @@ export class PopoutWindowComponent implements OnDestroy  {
     this.cd.detectChanges();
   }
 
-  popOut(): void {
+  popOut(event?: MouseEvent): void {
     if (!this.popoutWindow) {
-      this.createPopoutWindow();
+      this.createPopoutWindow(event);
       this.cloneStylesToPopoutWindow();
+      this.observeFutureStyleChanges();
 
       this.renderer2.appendChild(this.popoutWindow.document.body, this.innerWrapper.nativeElement);
 
@@ -65,10 +69,13 @@ export class PopoutWindowComponent implements OnDestroy  {
     }
   }
   
-  private createPopoutWindow() {
+  private createPopoutWindow(mouseEvent?: MouseEvent) {
       const elmRect = this.innerWrapper.nativeElement.getBoundingClientRect();
+      this.innerWrapperStyle = this.wrapperRetainSizeOnPopout 
+      ? { width: elmRect.width + 'px', height:  elmRect.height + 'px' }
+      : null;
 
-      const [winLeft, winTop] = this.getWindowPositioning(elmRect);
+      const [winLeft, winTop] = this.getWindowPositioning(elmRect, mouseEvent);
 
       this.popoutWindow = window.open(
         '',
@@ -83,12 +90,19 @@ export class PopoutWindowComponent implements OnDestroy  {
       this.popoutWindow.document.body.style.margin = '0';
   }
 
-  private getWindowPositioning(elmRect: DOMRect) {
+  private getWindowPositioning(elmRect: DOMRect, mouseEvent?: MouseEvent) {
       const navHeight = window.outerHeight - window.innerHeight;
-      const navWidth = window.outerWidth - window.innerWidth;
+      const navWidth = (window.outerWidth - window.innerWidth) / 2;
 
-      const winLeft = window.screenX + navWidth + elmRect.left;
-      const winTop = window.screenY + navHeight + elmRect.top - 60;
+      let winTop = window.screenY + navHeight + elmRect.top - 60;
+      let winLeft = window.screenX + navWidth + elmRect.left;
+
+      // Position window titleBar under mouse
+      if (mouseEvent) { 
+        winTop = mouseEvent.clientY + navHeight - 7;
+        winLeft += 120;
+      }
+
       return [winLeft, winTop];
   }
 
@@ -96,7 +110,8 @@ export class PopoutWindowComponent implements OnDestroy  {
     if (this.popoutWindow) {
       this.popoutWindow.close();
       this.popoutWindow = null;
-      this.closed.next(true)
+      this.innerWrapperStyle = null;
+      this.closed.next(true);
     }
   }
   
@@ -113,12 +128,10 @@ export class PopoutWindowComponent implements OnDestroy  {
     document.head.querySelectorAll('style').forEach(node => {
       this.popoutWindow.document.head.appendChild(node.cloneNode(true));
     });
-
-    this.observeStyleChanges();
   }
 
-  private observeStyleChanges() {
-    const node = document.querySelector('head');
+  private observeFutureStyleChanges() {
+    const headEle = document.querySelector('head');
 
     this.observer?.disconnect();
     this.observer = new MutationObserver((mutations) => {
@@ -131,6 +144,6 @@ export class PopoutWindowComponent implements OnDestroy  {
       });
     });
 
-    this.observer.observe(node, { childList: true });
+    this.observer.observe(headEle, { childList: true });
   }
 }
