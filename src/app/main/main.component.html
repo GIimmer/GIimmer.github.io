@@ -1,77 +1,86 @@
-<div style="background-color: #eee">
-  <h1 style="display: inline-block">Angular Popout Window</h1>
-  <a href="https://www.npmjs.com/package/angular-popout-window" style="margin-right: 15px; margin-left: 15px;">npm</a>
-  <a href="https://github.com/Shemesh/angular-popout-window">github</a>
-</div>
-<br />
-<div>
-  take an action:
-  <button (click)="windowComponent.popOut()" style="margin-right: 10px">pop it Out</button>
-  <button (click)="windowComponent.popIn()">back inside</button>
-</div>
-<br />
-<p>- notice how all style (including inherited) are preserved when popped out</p>
-<details class="details">
-  <summary>expand for more stuff</summary>
-  <div>
-    <label>
-      binding jahBless:
-      <input [(ngModel)]="jahBless"/>
-      works from both in and out
-    </label><br/><br/>
-    <label>
-      windowWidth
-      <input [(ngModel)]="windowComponent.windowWidth" type="number" style="max-width: 100px;"/>
-      if less then 100 then width is the <b>content width</b>.
-    </label><br/><br/>
-    <label>
-      windowHeight
-      <input [(ngModel)]="windowComponent.windowHeight" type="number" style="max-width: 100px;"/>
-      if less then 100 then height is the <b>content height</b>.
-    </label><br/><br/>
-    <label>
-      windowLeft
-      <input [(ngModel)]="windowComponent.windowLeft" type="number" style="max-width: 100px;"/>
-      if empty then positioned per <b>content position</b>.
-    </label><br/><br/>
-    <label>
-      windowTop
-      <input [(ngModel)]="windowComponent.windowTop" type="number" style="max-width: 100px;"/>
-      if empty then positioned per <b>content position</b>.
-    </label><br/><br/>
-    <label>
-      windowTitle
-      <input [(ngModel)]="windowComponent.windowTitle"/>
-      if empty then title is derived from main app title.
-    </label><br/><br/>
-    <label>
-      show large content
-      <input type="checkbox" [(ngModel)]="this.isChecked"/>
-    </label>
+<div id="wrapper">
+  <div id="header">
+    <h1>Angular Opinionated Popout Window</h1>
+    <p id="information">
+      <i>This project is a fork of Shemesh's more customizable <a href="https://github.com/Shemesh/angular-popout-window" target="_blank">Angular-Popout-Window.</a> 
+      If you would like more control over your popout window (especially the positioning), I will link his project 
+      at the bottom of this page
+      </i>
+      This package, in contrast, is designed to be extremely easy to use - providing fewer options but enabling developers to 
+      quickly add popout windows with sensible defaults. 
+    </p>
   </div>
-</details>
-<h2>&lt;popout-window&gt;</h2>
-<div class="resizable" #resizableDiv>
-  <popout-window [whiteIcon]="true" #windowComponent>
-    <div class="div1" style="border: 7px solid gray; padding: 10px" >
-      <label class="label1">
-        binding jahBless:
-        <input [(ngModel)]="jahBless" />
-      </label>
-      <br>
-      <br />
-      <button (click)="windowComponent.popOut()" style="margin-right: 10px">pop me Out</button>
-      <button (click)="windowComponent.popIn()">take me inside</button>
+  <div id="body">
+    <div class="demo dataBindingDemo">
+      <div class="demoInformation">
+        <h3>Data bound with Parent Window</h3>
+        <p>Try popping out the window and increasing the number of circles! Or delete some circles in the window and watch the 'number of circles' in the parent fall.</p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Number of Circles</mat-label>
+          <input matInput max="100" type="number" [formControl]="numberInput" placeholder="Number">
+        </mat-form-field>
+      </div>
+      <div class="demoPopoutableWindowContainer">
+        <popout-window>
+          <div class="dataBindingPopoutable">
+            <div *ngFor="let item of itemArray, index as i" [ngStyle]="{ 'background-color': item.color }">
+              <mat-icon
+                (click)="onDeleteItem(i)"
+                aria-hidden="false"
+                aria-label="Example home icon">cancel</mat-icon>
+            </div>
+          </div>
+        </popout-window>
+      </div>
     </div>
-    <app-ng-start *ngIf="this.isChecked"></app-ng-start>
-    <div class="textarea1">
-      <label>
-        it is the same instance of the html dom elements:<br />
-        <textarea style="width: 100%; height: 90px">change the text to see how it is preserved without binding&#013; &#010;the textarea size is also preserved, resize to try.</textarea>
-      </label>
+    <div class="demo styleMatchingDemo">
+      <div class="demoInformation">
+        <h3>Can handle varied aspect ratios and dark themes</h3>
+        <p>The software will attempt to create a window of the same heighth and width as the element it is wrapping.
+          You can set the color of the pop-out/in icon to be white, if you are using a dark theme for example.
+        </p>
+      </div>
+      <div class="demoPopoutableWindowContainer"> 
+        <popout-window [whiteIcon]="true">
+          <div class="styleMatchingPopoutable">
+            <p style="color: white">Look how aesthetic!</p>
+          </div>
+        </popout-window>
+      </div>
     </div>
-  </popout-window>
-  <div class="resizer" #resizer cdkDrag
-       (cdkDragStarted)="dragStart()" (cdkDragMoved)="resizerMoved($event)">drag to resize</div>
+    <div class="demo spacePreservingDemo">
+      <div class="demoInformation">
+        <h3>Can collapse when popped out, or stay strong</h3>
+        <p>
+          In cases when space is at a premium, your users may want the extra space on your UI that popping a component out affords.
+          In some cases however shifting elements may prove more confusing than it's worth, we leave it to you to decide.
+        </p>
+        <mat-checkbox [formControl]="wrapperRetainSizeOnPopout">Retain size when popped out</mat-checkbox>
+      </div>
+      <div class="demoPopoutableWindowContainer">
+        <p>
+        There's a whole lot of important text here that your users may want to pay attention to...
+        </p>
+        <popout-window [wrapperRetainSizeOnPopout]="wrapperRetainSizeOnPopout.value">
+          <div class="spacePreservingPopoutable">
+            <p><i>Some amazing component</i></p>
+            <br>
+            <p><i>Which takes up a good bitta space</i></p>
+            <br>
+          </div>
+        </popout-window>
+        <p>
+          ...and it continues after the popout component! In some cases it'd be preferable to prevent the text from jumping around on 
+        popout, but in others it might be nicer to push it closer toogether once popped out. You choose!
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <h2>Angular Opinionated Popout Window</h2>
+    <div id="contactLinks">
+      <p><b>NPM:</b> lel</p>
+      <p><b>Github:</b> lol</p>
+    </div>
+  </div>
 </div>
-<h2>&lt;/popout-window&gt;</h2>
