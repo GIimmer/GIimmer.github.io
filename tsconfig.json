@@ -16,6 +16,10 @@
       "dom"
     ],
     "paths": {
+      "angular-opinionated-popout-window": [
+        "dist/angular-opinionated-popout-window/angular-opinionated-popout-window",
+        "dist/angular-opinionated-popout-window"
+      ],
       "popout-window": [
         "dist/popout-window/popout-window",
         "dist/popout-window"

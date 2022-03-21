@@ -172,6 +172,37 @@
           }
         }
       }
+    },
+    "angular-opinionated-popout-window": {
+      "projectType": "library",
+      "root": "projects/angular-opinionated-popout-window",
+      "sourceRoot": "projects/angular-opinionated-popout-window/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/angular-opinionated-popout-window/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/angular-opinionated-popout-window/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/angular-opinionated-popout-window/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/angular-opinionated-popout-window/src/test.ts",
+            "tsConfig": "projects/angular-opinionated-popout-window/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-opinionated-popout-window/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "angular-popout-window",
