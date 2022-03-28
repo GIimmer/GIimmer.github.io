@@ -21,7 +21,7 @@ export class PopoutWindowComponent implements OnDestroy  {
   @Input() windowTitle: string;
   @Input() whiteIcon: boolean;
   @Input() wrapperRetainSizeOnPopout: boolean;
-  @Output() closed: EventEmitter<boolean> = new EventEmitter();
+  @Output() closed: EventEmitter<void> = new EventEmitter();
 
   @ViewChild('innerWrapper') private innerWrapper: ElementRef;
   @ViewChild('popoutWrapper') private popoutWrapper: ElementRef;
@@ -111,7 +111,7 @@ export class PopoutWindowComponent implements OnDestroy  {
       this.popoutWindow.close();
       this.popoutWindow = null;
       this.innerWrapperStyle = null;
-      this.closed.next(true);
+      this.closed.next();
     }
   }
   
