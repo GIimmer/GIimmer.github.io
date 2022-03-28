@@ -1,65 +1,106 @@
-# Angular Popout Window
+# Angular Opinionated Popout Window
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm](https://img.shields.io/npm/v/angular-popout-window)](https://www.npmjs.com/package/angular-popout-window)
 
-with this component you can very simply popout any part of your Angular application into a new un-docked browser child window.
+Check out what this library can do at the [demo website](https://giimmer.github.io/angular-opinionated-popout-window/)
 
-try the [online demo](https://shemesh.github.io/angular-popout-window/) to see some funky stuff.
+## Why Use this Library?
+AOPW is a batteries-included approach to adding popoutable components to your application. This library is based on Shemesh's [Angular-Popout-Window](https://shemesh.github.io/angular-popout-window/), which has taken lengths to make sure your component looks the same in the child window as it did in the parent.
 
-supports opening several child windows.
+In general, this library focuses on ease-of-use while APW allows for greater customization, full changelog below.
+<br>
+<br>
 
-thriving for a minimal footprint, ease of use, clean and compatible code.
+
+## Requirements
+This library is compiled using Angular Ivy - therefore your application must use at least Angular version 12. 
+<br>
+<br>
 
 ## Installation
-Install through npm:
+Install via NPM
+
 ```
-npm install --save angular-popout-window
+npm install angular-opinionated-popout-window
 ```
 
-## Usage
-add `PopoutWindowModule` into the `imports` array of your `@NgModule`:
+And add it to your App Module
 ```
 import { PopoutWindowModule } from 'angular-popout-window';
-...
+
 @NgModule({
-  imports: [ PopoutWindowModule ... ],
-  ...
+  imports: [
+    ...
+    PopoutWindowModule,
+  ],
 })
-```
-in your html wrap your content with the `<popout-window>` tag, and give it a name so it can be referenced:
-```
-<popout-window #popoutWindow1 >
-... your html here ...
-</popout-window>
+export class AppModule {}
 ```
 
-to pop out call `popOut()`, to bring back inside call `popIn()`:
+And that's all the setup you need!
+<br>
+<br>
+
+## Usage
+
+This library is all about simplicity, all you'll typically need is this:
+
 ```
-(click)="popoutWindow1.popOut()"
 ...
-(click)="popoutWindow1.popIn()"
+<popout-window>
+  <your-component></your-component>
+</popout-window>
+...
 ```
 
-## 
+The above code will wrap your component, adding a dock/undock button which sits above and to the right of your component. The resulting box-model will look like the image below, with the purple line representing your component, and the blue line representing the added wrapping margin *(colored outlines added for example purposes only)*.
 
-upon `popOut()` we do our best to calculate dimensions and location of the content relative to screen, then position the new window at same position and size.
+<img src="./popout-box-model.jpg" width="400" height="216" />
 
-you can override this by explicitly setting each of those properties for the new child window: 
-- `windowTop` - pixels from top of screen.
-- `windowLeft` - pixels from left of screen.
-- `windowWidth` - width of window in pixels.
-- `windowHeight`  - height of window in pixels.
+<br>
 
-use `windowStyle` property to apply styles on the child window, or `windowStyleUrl` to add a css file.
+## API
 
-`suppressCloneStyles` will skip the style cloning from parent to popped out window.
+| Input/Output                    | Datatype    | Default Value         | Description
+| ------------------------------- | ----------- | --------------------- | -----------------------------
+| \[windowTitle\]                 | string      | window.document.title | Sets the document title of the child window
+| \[whiteIcon\]                   | boolean     | false                 | Inverts color of undock icon, e.g. for dark themes
+| \[wrapperRetainSizeOnPopout\]   | boolean     | false                 | Whether container for popoutable component retains its dimensions on popout - allows you to optimize for UI stability, or UI density
+| \(closed\)                      | void        | n/a                   | Emits on close, either via pop-in button or simply close of the child window  
 
-when the popped out child window is closed, by pressing its X button for example, it will run `popIn()` to bring the content back inside.
+<br>
+<br>
+And if you need to programmatically open or close the popout window, simply make a reference to the popout-window component in your html:
 
-when the main page unload the popped window is closed.
+```
+...
+<popout-window #popoutWindow>
+  <your-component></your-component>
+</popout-window>
+...
+```
 
-starting in version 3.0.0 the package depends on Angular/core only (removed the cdk dependency on).
+From your component.ts:
+```
+@ViewChild('popoutWindow') private popoutWindow: PopoutWindowComponent;
+```
+
+Now you can call...
+```
+this.popoutWindow.popOut();
+this.popoutWindow.popIn();
+```
+<br>
+<br>
+
+## Changelog from Angular-Popout-Window
+1. Adding builtin toggle button, with optional color inversion
+2. Adding preserve-wrapper-size option
+3. Window now attempts to open with titlebar under users cursor for quick drag re-positioning, rather than attempting to overlay original position
+4. Removed many customizations around sizing and placement
+<br>
+<br>
 
 ## License
 
