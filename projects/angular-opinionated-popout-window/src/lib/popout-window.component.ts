@@ -114,9 +114,11 @@ export class PopoutWindowComponent {
   }
   
   private cloneStylesToPopoutWindow() {
-    document.fonts.forEach(node => {
-      (this.popoutWindow.document as any).fonts.add(node);
-    });
+    if (window.navigator.userAgent.indexOf('Firefox') === -1) {
+      document.fonts.forEach(node => {
+        (this.popoutWindow.document as any).fonts.add(node);
+      });
+    }
 
     document.head.querySelectorAll('link[rel="stylesheet"]').forEach(node => {
       this.popoutWindow.document.head.insertAdjacentHTML('beforeend',
