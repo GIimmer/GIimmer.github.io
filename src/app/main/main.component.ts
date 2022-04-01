@@ -35,7 +35,7 @@ export class MainComponent implements OnInit {
   }
 
   private getRandomRGBA() {
-    var o = Math.round, r = Math.random, s = 255;
-    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+    const rand255 = () => Math.round(Math.random()*255);
+    return 'rgba(' + rand255() + ',' + rand255() + ',' + rand255() + ',' + Math.random().toFixed(1) + ')';
   }
 }
