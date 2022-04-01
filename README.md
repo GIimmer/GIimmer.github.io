@@ -99,6 +99,7 @@ this.popoutWindow.popIn();
 2. Adding preserve-wrapper-size option
 3. Window now attempts to open with titlebar under users cursor for quick drag re-positioning, rather than attempting to overlay original position
 4. Removed many customizations around sizing and placement
+5. Some bugfixes/code refactoring
 <br>
 <br>
 

@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm](https://img.shields.io/npm/v/angular-popout-window)](https://www.npmjs.com/package/angular-popout-window)
 
-Check out what this library can do at the [demo website](https://glimmer.github.io/angular-opinionated-popout-window/)
+Check out what this library can do at the [demo website](https://giimmer.github.io/angular-opinionated-popout-window/)
 
 ## Why Use this Library?
 AOPW is a batteries-included approach to adding popoutable components to your application. This library is based on Shemesh's [Angular-Popout-Window](https://shemesh.github.io/angular-popout-window/), which has taken lengths to make sure your component looks the same in the child window as it did in the parent.
@@ -56,7 +56,7 @@ This library is all about simplicity, all you'll typically need is this:
 
 The above code will wrap your component, adding a dock/undock button which sits above and to the right of your component. The resulting box-model will look like the image below, with the purple line representing your component, and the blue line representing the added wrapping margin *(colored outlines added for example purposes only)*.
 
-<img src="./popout-box-model.jpg" width="400" height="216" />
+<img src="https://github.com/GIimmer/angular-opinionated-popout-window/blob/main/popout-box-model.jpg?raw=true" width="400" height="216" />
 
 <br>
 
@@ -99,6 +99,7 @@ this.popoutWindow.popIn();
 2. Adding preserve-wrapper-size option
 3. Window now attempts to open with titlebar under users cursor for quick drag re-positioning, rather than attempting to overlay original position
 4. Removed many customizations around sizing and placement
+5. Some bugfixes/code refactoring
 <br>
 <br>
 
