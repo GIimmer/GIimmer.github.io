@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -55,6 +56,14 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           }
         },
@@ -66,8 +75,12 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-popout-window:build:production"
+            },
+            "development": {
+              "browserTarget": "angular-popout-window:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -87,6 +100,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,46 +133,40 @@
         }
       }
     },
-    "popout-window": {
+    "angular-opinionated-popout-window": {
       "projectType": "library",
-      "root": "projects/popout-window",
-      "sourceRoot": "projects/popout-window/src",
+      "root": "projects/angular-opinionated-popout-window",
+      "sourceRoot": "projects/angular-opinionated-popout-window/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/popout-window/tsconfig.lib.json",
-            "project": "projects/popout-window/ng-package.json"
+            "project": "projects/angular-opinionated-popout-window/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/popout-window/tsconfig.lib.prod.json"
+              "tsConfig": "projects/angular-opinionated-popout-window/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/angular-opinionated-popout-window/tsconfig.lib.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/popout-window/src/test.ts",
-            "tsConfig": "projects/popout-window/tsconfig.spec.json",
-            "karmaConfig": "projects/popout-window/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/popout-window/tsconfig.lib.json",
-              "projects/popout-window/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "main": "projects/angular-opinionated-popout-window/src/test.ts",
+            "tsConfig": "projects/angular-opinionated-popout-window/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-opinionated-popout-window/karma.conf.js"
           }
         }
       }
     }
   },
-  "defaultProject": "angular-popout-window"
+  "defaultProject": "angular-popout-window",
+  "cli": {
+    "analytics": false
+  }
 }

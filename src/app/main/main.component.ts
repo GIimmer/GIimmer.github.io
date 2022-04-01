@@ -1,5 +1,5 @@
-import {ApplicationRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {CdkDragMove} from '@angular/cdk/drag-drop';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-main',
@@ -7,32 +7,35 @@ import {CdkDragMove} from '@angular/cdk/drag-drop';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+  numberInput = new FormControl(0);
+  itemArray: { color: string }[] = [];
 
-  jahBless = 'Jah Bless';
-  isChecked: any;
-  private rect;
+  wrapperRetainSizeOnPopout = new FormControl(false);
 
-  @ViewChild('resizableDiv') resizableDiv: ElementRef;
-  @ViewChild('resizer') resizer: ElementRef;
-
-  constructor() { }
+  onDeleteItem(itemIdx: number)  {
+    this.itemArray.splice(itemIdx,1);
+    this.numberInput.setValue(this.numberInput.value - 1);
+  }
 
   ngOnInit(): void {
+    this.numberInput.valueChanges.subscribe(change => {
+      if (change === null) return;
+
+      const delta = change  - this.itemArray.length;
+      const diff = Math.abs(delta);
+      if (delta > 0) {
+        for (let i = 0; i < delta; i++) {
+          this.itemArray.push({ color: this.getRandomRGBA() });
+        }
+      } else if (delta < 0) {
+        this.itemArray.splice(-diff,diff);
+      }
+    })
+    this.numberInput.setValue(2);
   }
 
-  resizerMoved(event: CdkDragMove): void {
-    const newW = this.rect.width + event.distance.x;
-    const newH = this.rect.height + event.distance.y;
-    if (newW > 350) {
-      this.resizableDiv.nativeElement.style.width = `${newW}px`;
-    }
-    if (newH > 300) {
-      this.resizableDiv.nativeElement.style.height = `${newH}px`;
-    }
-    this.resizer.nativeElement.style.transform = `translate3d(0, 0, 0)`;
-  }
-
-  dragStart(): void {
-    this.rect  = this.resizableDiv.nativeElement.getBoundingClientRect();
+  private getRandomRGBA() {
+    const rand255 = () => Math.round(Math.random()*255);
+    return 'rgba(' + rand255() + ',' + rand255() + ',' + rand255() + ',' + Math.random().toFixed(1) + ')';
   }
 }

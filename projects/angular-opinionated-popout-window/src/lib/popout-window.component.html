@@ -1,0 +1,12 @@
+
+<div #popoutWrapper class="popoutWrapper" [ngStyle]="innerWrapperStyle">
+  <button *ngIf="isPoppedOut" class="popInButton" (click)="popIn()">
+    <span class="icon" [ngClass]="{ 'whiteIcon': !!whiteIcon }"></span>
+  </button>
+  <button *ngIf="!isPoppedOut" class="popOutButton" (click)="popOut($event)">
+    <span class="icon" [ngClass]="{ 'whiteIcon': !!whiteIcon }"></span>
+  </button>
+  <div #innerWrapper class="innerWrapper" style="padding: 10px">
+    <ng-content></ng-content>
+  </div>
+</div>

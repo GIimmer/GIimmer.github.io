@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm](https://img.shields.io/npm/v/angular-popout-window)](https://www.npmjs.com/package/angular-popout-window)
 
-Check out what this library can do at the [demo website](https://giimmer.github.io/angular-opinionated-popout-window/)
+Check out what this library can do at the [demo website](https://glimmer.github.io/angular-opinionated-popout-window/)
 
 ## Why Use this Library?
 AOPW is a batteries-included approach to adding popoutable components to your application. This library is based on Shemesh's [Angular-Popout-Window](https://shemesh.github.io/angular-popout-window/), which has taken lengths to make sure your component looks the same in the child window as it did in the parent.
