@@ -41,7 +41,7 @@ export class PopoutWindowComponent {
   }
 
   ngOnDestroy(): void {
-    this.observer.disconnect();
+    this.observer?.disconnect();
     this.close();
   }
 

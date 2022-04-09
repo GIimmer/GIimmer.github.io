@@ -1,6 +1,6 @@
 {
   "name": "angular-opinionated-popout-window",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "description": "An Angular library to easily add popoutable-capability to components in your application",
   "license": "MIT",
   "bugs": "https://github.com/GIimmer/angular-opinionated-popout-window/issues",
@@ -11,8 +11,8 @@
     "child window"
   ],
   "peerDependencies": {
-    "@angular/common": "^13.2.0",
-    "@angular/core": "^13.2.0"
+    "@angular/common": "^12.0.0",
+    "@angular/core": "^12.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
