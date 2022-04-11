@@ -56,7 +56,7 @@ This library is all about simplicity, all you'll typically need is this:
 
 The above code will wrap your component, adding a dock/undock button which sits above and to the right of your component. The resulting box-model will look like the image below, with the purple line representing your component, and the blue line representing the added wrapping margin *(colored outlines added for example purposes only)*.
 
-<img src="./popout-box-model.jpg" width="400" height="216" />
+<img src="https://github.com/GIimmer/angular-opinionated-popout-window/blob/main/popout-box-model.jpg?raw=true" width="400" height="216" />
 
 <br>
 
