@@ -27,7 +27,7 @@ npm install angular-opinionated-popout-window
 
 And add it to your App Module
 ```
-import { PopoutWindowModule } from 'angular-popout-window';
+import { PopoutWindowModule } from 'angular-opinionated-popout-window';
 
 @NgModule({
   imports: [
