@@ -1,6 +1,6 @@
 {
   "name": "angular-opinionated-popout-window",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "An Angular library to easily add popoutable-capability to components in your application",
   "license": "MIT",
   "bugs": "https://github.com/GIimmer/angular-opinionated-popout-window/issues",
